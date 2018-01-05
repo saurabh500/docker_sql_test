@@ -14,9 +14,5 @@ WORKDIR /var/opt/mssql/backup
 
 RUN wget $adventureWorks2017Download && wget $northwindDownload && wget $pubsDownload
 
-WORKDIR /var/opt/scripts
-ADD restore.sql .
-ADD wait-for-sql.sh . 
-
 CMD /opt/mssql/bin/sqlservr
 
