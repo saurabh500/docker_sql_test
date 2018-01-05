@@ -5,4 +5,4 @@ ADD restore.sql .
 ENV MSSQLTOOLS_ROOT /opt/mssql-tools
 ENV PATH "$MSSQLTOOLS_ROOT/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
-CMD sqlcmd -S $SQLHOST -U sa -P $PASSWORD -i restore.sql
+CMD sqlcmd -S $SQLHOST -U sa -P $SA_PASSWORD -i restore.sql
