@@ -5,10 +5,13 @@ ENV northwindDownload "https://github.com/saurabh500/docker_sql_test/releases/do
 ENV pubsDownload "https://github.com/saurabh500/docker_sql_test/releases/download/2017/pubs.bak"
 
 ADD restore.sql .
+ADD createsaschema.sql .
+ADD CreateUdtTestDb.sql .
+ADD EnableNotifications.sql .
 
 RUN Invoke-WebRequest -Uri $env:adventureWorks2017Download -OutFile AdventureWorks2017.bak; \
     Invoke-WebRequest -Uri $env:northwindDownload          -OutFile Northwind.bak; \
     Invoke-WebRequest -Uri $env:pubsDownload               -OutFile pubs.bak; 
 
 CMD .\start -sa_password $env:sa_password -ACCEPT_EULA $env:ACCEPT_EULA -attach_dbs \"$env:attach_dbs\" -Verbose
-RUN sqlcmd -S localhost -i restore.sql
+RUN sqlcmd -S localhost -i restore.sql  -i createsaschema.sql -i EnableNotifications.sql
